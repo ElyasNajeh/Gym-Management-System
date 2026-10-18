@@ -18,15 +18,7 @@ public class Member
         }
         set
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException("Name Can't be empty");
-            }
-            value = value.Trim();
-            if (!Regex.IsMatch(value, @"^[\p{L}]+(?: [\p{L}]+)*$"))
-            {
-                throw new ArgumentException("Name must contain only letters");
-            }
+            validateName(value);
             name = value;
         }
 
@@ -39,10 +31,7 @@ public class Member
         }
         set
         {
-            if (value < 18 || value > 65)
-            {
-                throw new ArgumentOutOfRangeException("Age must be between 18 and 65");
-            }
+            validateAge(value);
             age = value;
         }
     }
@@ -54,10 +43,7 @@ public class Member
         }
         set
         {
-            if (value < 40 || value > 150)
-            {
-                throw new ArgumentOutOfRangeException("Invalid Weight");
-            }
+            validateWeight(value);
             weight = value;
         }
     }
@@ -69,11 +55,7 @@ public class Member
         }
         set
         {
-            if (string.IsNullOrWhiteSpace(value) || !Regex.IsMatch(value, @"^05[69][0-9]{7}$"))
-            {
-                throw new ArgumentException("Invalid phone number");
-            }
-
+            validatePhoneNumber(value);
             phoneNumber = value;
         }
     }
@@ -87,6 +69,42 @@ public class Member
         PhoneNumber = phoneNumber;
 
         Id = nextId++;
+    }
+
+    internal static void validateName(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException("Name Can't be empty");
+        }
+        value = value.Trim();
+        if (!Regex.IsMatch(value, @"^[\p{L}]+(?: [\p{L}]+)*$"))
+        {
+            throw new ArgumentException("Name must contain only letters");
+        }
+    }
+
+    internal static void validateAge(int value)
+    {
+        if (value < 18 || value > 65)
+        {
+            throw new ArgumentOutOfRangeException("Age must be between 18 and 65");
+        }
+    }
+    internal static void validateWeight(double value)
+    {
+        if (value < 40 || value > 150)
+        {
+            throw new ArgumentOutOfRangeException("Invalid Weight");
+        }
+    }
+    internal static void validatePhoneNumber(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value) || !Regex.IsMatch(value, @"^05[69][0-9]{7}$"))
+        {
+            throw new ArgumentException("Invalid phone number");
+        }
+
     }
 
 }

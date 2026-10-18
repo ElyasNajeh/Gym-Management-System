@@ -18,15 +18,7 @@ public class SubscriptionPlan
         }
         set
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException("Plan name Can't be empty");
-            }
-            value = value.Trim();
-            if (!Regex.IsMatch(value, @"^[\p{L}]+(?: [\p{L}]+)*$"))
-            {
-                throw new ArgumentException("Name must contain only letters");
-            }
+            validateName(value);
             name = value;
         }
     }
@@ -38,10 +30,7 @@ public class SubscriptionPlan
         }
         set
         {
-            if (value < 100 || value > 1000)
-            {
-                throw new ArgumentOutOfRangeException("Plan Price muet be between 100 and 1000");
-            }
+            validatePrice(value);
             price = value;
         }
     }
@@ -53,10 +42,7 @@ public class SubscriptionPlan
         }
         set
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException("Description Can't be empty");
-            }
+            validateDescription(value);
             description = value.Trim();
         }
     }
@@ -67,5 +53,31 @@ public class SubscriptionPlan
         Description = description;
 
         Id = nextId++;
+    }
+    internal static void validateName(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException("Plan name Can't be empty");
+        }
+        value = value.Trim();
+        if (!Regex.IsMatch(value, @"^[\p{L}]+(?: [\p{L}]+)*$"))
+        {
+            throw new ArgumentException("Name must contain only letters");
+        }
+    }
+    internal static void validatePrice(decimal value)
+    {
+        if (value < 100 || value > 1000)
+        {
+            throw new ArgumentOutOfRangeException("Plan Price muet be between 100 and 1000");
+        }
+    }
+    internal static void validateDescription(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException("Description Can't be empty");
+        }
     }
 }
