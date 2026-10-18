@@ -3,10 +3,10 @@ using System.Text.RegularExpressions;
 public class Member
 {
     private static int nextId = 1;
-    private string name;
+    private string name = null!;
     private int age;
     private double weight;
-    private string phoneNumber;
+    private string phoneNumber = null!;
 
     public int Id { get; private set; }
 

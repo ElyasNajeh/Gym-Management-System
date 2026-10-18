@@ -1,0 +1,6 @@
+Name	Price	Description
+Essential Fitness	150	Gym floor access during standard opening hours
+Strength Plus	275	Full gym access with strength training sessions
+Active Lifestyle	400	Gym access with group fitness classes
+Complete Wellness	650	All classes with monthly wellness consultation
+Elite Performance	950	Premium access with personal training support

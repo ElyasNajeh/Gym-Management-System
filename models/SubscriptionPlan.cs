@@ -4,9 +4,9 @@ using System.Text.RegularExpressions;
 public class SubscriptionPlan
 {
     private static int nextId = 1;
-    private string name;
+    private string name = null!;
     private decimal price;
-    private string description;
+    private string description = null!;
 
     public int Id { get; private set; }
 
